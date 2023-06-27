@@ -1,17 +1,18 @@
+import { type } from "os";
 import React, { JSX, useState, useEffect } from "react";
-import reactLogo from "./assets/react.svg";
+import ReactMarkdown from "react-markdown";
+import react from "@vitejs/plugin-react";
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { invoke } from "@tauri-apps/api/tauri";
 import { fetch, getClient, Body, Response, ResponseType, Client } from "@tauri-apps/api/http";
 import { Input } from "antd";
 import { Card } from 'antd';
 import { Col, Row } from 'antd';
 import { Avatar, Divider, List, Skeleton } from 'antd';
-import InfiniteScroll from 'react-infinite-scroll-component';
 import "./App.css";
 import "./bubble.css";
 import { ReadOutlined } from "@ant-design/icons";
-import react from "@vitejs/plugin-react";
-import { type } from "os";
+import reactLogo from "./assets/react.svg";
 
 type Message = {
     from: string;
@@ -63,15 +64,15 @@ function App() {
         const curDate = new Date();
         const endDate = new Date("2023-07-10");
         if (curDate.getTime() > endDate.getTime()) {
-            setAnswer("您使用的客户端版本已过期, 请更新客户端版本。该版本最后支持时间为 "+ endDate.toLocaleDateString());
+            setAnswer("您使用的客户端版本已过期, 请更新客户端版本。该版本最后支持时间为 " + endDate.toLocaleDateString());
             return;
         }
         console.log("messages:", messages);
-        const azureCompletionURL: string = "<set it when build>";
+        const azureCompletionURL: string = "set it when build";
         const client = getClient();
         fetch(azureCompletionURL, {
             method: "POST",
-            timeout: 30,
+            timeout: 60,
             body: Body.json({
                 model: "gpt-3.5-turbo",
                 messages: [
@@ -90,7 +91,7 @@ function App() {
                 "Accept-Encoding": "gzip",
                 "Cache-Control": "no-cache",
                 "Accept": "text/event-stream",
-                "Api-Key": "<set it when build>",
+                "Api-Key": "set it when build",
                 "Content-Type": "application/json"
             },
             responseType: ResponseType.JSON,
@@ -102,8 +103,8 @@ function App() {
             console.log("parsed data", j);
 
             const completion: Completion = JSON.parse(s);
-            setAnswer(completion.choices[completion.choices.length-1].message.content);
-            
+            setAnswer(completion.choices[completion.choices.length - 1].message.content);
+
         }).catch((reason: any) => {
             setAnswer(reason);
             console.log("request error:", reason);
@@ -127,9 +128,9 @@ function App() {
 
     return (
         <div className="container">
-            <WelcomeComponent />
-            <ChatBox messages={messages} />
-            <InputBox sendMessage={sendMessage} />
+            {/* <WelcomeComponent /> */}
+            <div style={{ height: 550 }}><ChatBox messages={messages} /></div>
+            <div style={{ height: 200 }}><InputBox sendMessage={sendMessage} /></div>
         </div>
     );
 }
@@ -150,27 +151,26 @@ function WelcomeComponent(): JSX.Element {
 function ChatBox({ messages }: { messages: Message[] }): JSX.Element {
     console.log("ChatBox", messages)
     return (
-        <div style={{ backgroundColor: 'white', color: 'black', textAlign: "left" }}>
-            <div
-                id="scrollableDiv"
-                style={{
-                    height: 500,
-                    overflow: 'auto',
-                    padding: '0 16px',
-                    border: '1px solid rgba(140, 140, 140, 0.35)',
-                    backgroundColor: 'white',
-                    color: 'black',
-                    textAlign: 'left'
-                }}
+        
+            <div id="scrollableDiv" style={{
+                height: '100%',
+                overflow: 'auto',
+                padding: '0 16px',
+                paddingRight: '15px',
+                border: '1px solid rgba(140, 140, 140, 0.35)',
+                // backgroundColor: 'white',
+                textAlign: 'left',
+                scrollbarWidth: 'none'
+            }}
             >
-                <Row color="black">
+                <Row>
                     <Col span={24}>
                         <MessageRows messages={messages} />
                         <div className="row"><p></p></div>
                     </Col>
                 </Row>
             </div>
-        </div>
+        
     )
 }
 
@@ -191,9 +191,9 @@ function MessageRowRight({ content }: { content: string }): JSX.Element {
             <div className="row"><p></p></div>
             <Row>
                 <Col span={18} push={4}>
-                    <Card>
-                        <p>{content}</p>
-                    </Card>
+                    <div className="rcorners1">
+                        <ReactMarkdown>{content}</ReactMarkdown>
+                    </div>
                 </Col>
                 <Col span={2} push={4}>
                     <p>- 我</p>
@@ -213,9 +213,9 @@ function MessageRowLeft({ content }: { content: string }): JSX.Element {
                     <p>CodeAI -</p>
                 </Col>
                 <Col span={18}>
-                    <Card>
-                        <p>{content}</p>
-                    </Card>
+                    <div className="rcorners2">
+                        <ReactMarkdown>{content}</ReactMarkdown>
+                    </div>
                 </Col>
             </Row>
         </div>

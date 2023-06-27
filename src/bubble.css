@@ -1,90 +1,109 @@
 .bubble {
-    padding: 6px;
-    overflow: hidden;
-    position: relative;
-    color: black;
-  }
-  .bubble:after {
-    clear: both;
-    content: '';
-  }
-  .bubble a.avatar {
-    display: block;
-    height: 44px;
-    width: 44px;
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  .bubble a.avatar > img {
-    width: 100%;
-    height: 100%;
-  }
-  .bubble.left a.avatar {
-    float: left;
-  }
-  .bubble.right a.avatar {
-    float: right;
-  }
-  .bubble .content {
-    width: auto;
-    padding: 0.7em 0.5em;
-    font-size: 16px;
-    border-radius: 6px;
-    border: 1px solid;
-    position: relative;
-    display: inline-block;
-  }
-  .bubble .content:before {
-    content: '';
-    display: inline-block;
-    box-sizing: border-box;
-    width: 12px;
-    height: 12px;
-    border: 1px solid transparent;
-    border-radius: 3px;
-    position: absolute;
-    background-color: inherit;
-    border-right-color: inherit;
-    border-bottom-color: inherit;
-  }
-  .bubble.left {
-    text-align: left;
-  }
-  .bubble.right {
-    text-align: right;
-  }
-  .bubble.left .wrap {
-    margin-left: 56px;
-    margin-right: 56px;
-  }
-  .bubble.left .content {
-      background: #fafafa;
-      border-color: #c6c6c6;
-  }
-  .bubble.left .content:before {
-    left: -6px;
-    top: 16px;
-    transform: rotate(135deg);
-  }
-  .bubble.right .wrap {
-    margin-right: 56px;
-    margin-left: 56px;
-  }
-  .bubble.right .content {
-    background: #b3e866;
-    border-color: #9ab96b;
-    text-align: left;
-  }
-  .bubble.right .content:before {
-    right: -6px;
-    top: 16px;
-    transform: rotate(-45deg);
-  }
+  padding: 6px;
+  overflow: hidden;
+  position: relative;
+  color: black;
+}
 
-  #rcorners2 {
-    border-radius: 25px;
-    border: 2px solid #8AC007;
-    padding: 20px;
-    width: 200px;
-    height: 150px;
+.bubble:after {
+  clear: both;
+  content: '';
+}
+
+.bubble a.avatar {
+  display: block;
+  height: 44px;
+  width: 44px;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.bubble a.avatar>img {
+  width: 100%;
+  height: 100%;
+}
+
+.bubble.left a.avatar {
+  float: left;
+}
+
+.bubble.right a.avatar {
+  float: right;
+}
+
+.bubble .content {
+  width: auto;
+  padding: 0.7em 0.5em;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid;
+  position: relative;
+  display: inline-block;
+}
+
+.bubble .content:before {
+  content: '';
+  display: inline-block;
+  box-sizing: border-box;
+  width: 12px;
+  height: 12px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  position: absolute;
+  background-color: inherit;
+  border-right-color: inherit;
+  border-bottom-color: inherit;
+}
+
+.bubble.left {
+  text-align: left;
+}
+
+.bubble.right {
+  text-align: right;
+}
+
+.bubble.left .wrap {
+  margin-left: 56px;
+  margin-right: 56px;
+}
+
+.bubble.left .content {
+  background: #fafafa;
+  border-color: #c6c6c6;
+}
+
+.bubble.left .content:before {
+  left: -6px;
+  top: 16px;
+  transform: rotate(135deg);
+}
+
+.bubble.right .wrap {
+  margin-right: 56px;
+  margin-left: 56px;
+}
+
+.bubble.right .content {
+  background: #b3e866;
+  border-color: #9ab96b;
+  text-align: left;
+}
+
+.bubble.right .content:before {
+  right: -6px;
+  top: 16px;
+  transform: rotate(-45deg);
+}
+
+.rcorners1 {
+  border-radius: 10px;
+  border: 2px solid #eeefed;
+  padding: 10px;
+}
+
+.rcorners2 {
+  border-radius: 10px;
+  border: 2px solid #8AC007;
+  padding: 10px;
 }
